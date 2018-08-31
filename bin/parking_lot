@@ -3,4 +3,4 @@
 # Complete bin/setup so that after it is
 # run, bin/parking_lot can be used to launch
 # it.
-../src/my_program.py "$@"
+./src/my_program.py "$@"
