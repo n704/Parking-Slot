@@ -42,7 +42,7 @@ class TestingParkingSlot(unittest.TestCase):
         """
         parking_lot = ParkingLot(3)
         message = parking_lot.car_is_leaving(2)
-        self.assertEqual("Slot number 2 is free.\n", message)
+        self.assertEqual("Slot number 2 is free", message)
         try:
             parking_lot.car_is_leaving(-1)
         except Exception as e:
@@ -55,7 +55,7 @@ class TestingParkingSlot(unittest.TestCase):
         parking_lot.park_a_car("123", "123")
         parking_lot.park_a_car("123", "123")
         message = parking_lot.car_is_leaving(3)
-        self.assertEqual("Slot number 3 is free.\n", message)
+        self.assertEqual("Slot number 3 is free", message)
 
     def test_registration_numbers_for_cars_with_colour(self):
         """
@@ -70,7 +70,7 @@ class TestingParkingSlot(unittest.TestCase):
         registration_numbers = parking_lot.registration_numbers_for_cars_with_colour("WHITE")
         self.assertEqual(registration_numbers, "KA-01-HH-1234, KA-01-HH-9999")
         registration_numbers = parking_lot.registration_numbers_for_cars_with_colour("RED")
-        self.assertEqual(registration_numbers, "")
+        self.assertEqual(registration_numbers, "Not found")
 
     def test_slot_numbers_for_cars_with_colour(self):
         """
@@ -85,7 +85,7 @@ class TestingParkingSlot(unittest.TestCase):
         slots = parking_lot.slot_numbers_for_cars_with_colour("BLACK")
         self.assertEqual("2, 5", slots)
         slots = parking_lot.slot_numbers_for_cars_with_colour("YELLOW")
-        self.assertEqual("", slots)
+        self.assertEqual("Not found", slots)
 
     def test_slot_number_for_registration_number(self):
         """
@@ -100,7 +100,7 @@ class TestingParkingSlot(unittest.TestCase):
         slot = parking_lot.slot_number_for_registration_number("KA-01-HH-1234")
         self.assertEqual(slot, "1")
         slot = parking_lot.slot_number_for_registration_number("KA-01-Hd-1234")
-        self.assertEqual(slot, "")
+        self.assertEqual(slot, "Not found")
 
     def test_status(self):
         """
@@ -133,6 +133,45 @@ class TestingParkingSlot(unittest.TestCase):
 
         finally:
             sys.stdout = saved_stdout
+
+class TestingEndToEnd(unittest.TestCase):
+    def test_end_to_end(self):
+        import sys
+        from subprocess import call
+        from StringIO import StringIO
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            expected = """Created a parking lot with 6 slots
+Allocated slot number: 1
+Allocated slot number: 2
+Allocated slot number: 3
+Allocated slot number: 4
+Allocated slot number: 5
+Allocated slot number: 6
+Slot number 4 is free
+Slot No.    Registration No    Colour
+1           KA-01-HH-1234      White
+2           KA-01-HH-9999      White
+3           KA-01-BB-0001      Black
+5           KA-01-HH-2701      Blue
+6           KA-01-HH-3141      Black
+Allocated slot number: 4
+Sorry, parking lot is full
+KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333
+1, 2, 4
+6
+Not found
+"""
+            from subprocess import Popen, PIPE
+            p = Popen(["./my_program.py ../functional_spec/fixtures/file_input.txt"], shell=True, stdout=PIPE)
+            output = p.communicate()[0]
+            self.assertEqual(output, expected)
+        finally:
+            sys.stdout = saved_stdout
+
+
 
 
 
