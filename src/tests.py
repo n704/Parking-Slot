@@ -165,7 +165,7 @@ KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333
 Not found
 """
             from subprocess import Popen, PIPE
-            p = Popen(["./my_program.py ../functional_spec/fixtures/file_input.txt"], shell=True, stdout=PIPE)
+            p = Popen(["cd .. && ./bin/parking_lot ./functional_spec/fixtures/file_input.txt"], shell=True, stdout=PIPE)
             output = p.communicate()[0]
             self.assertEqual(output, expected)
         finally:

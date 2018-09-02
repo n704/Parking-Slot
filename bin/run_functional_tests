@@ -1,7 +1,17 @@
-#!/usr/bin/env ruby
-
-project_bin_dir = File.join(File.dirname(File.expand_path(__FILE__)))
-functional_spec_dir = File.join(project_bin_dir, '..', 'src')
-cmd = "cd #{functional_spec_dir}; python tests.py"
-puts cmd
-system cmd
+#!/usr/bin/env python
+# #!/usr/bin/env ruby
+#
+# project_bin_dir = File.join(File.dirname(File.expand_path(__FILE__)))
+# functional_spec_dir = File.join(project_bin_dir, '..', 'src')
+# cmd = "cd #{functional_spec_dir}; python tests.py"
+# puts cmd
+# system cmd
+import os
+from subprocess import Popen, PIPE
+project_bin_dir = os.path.dirname(os.path.realpath(__file__))
+functional_spec_dir = os.path.join(project_bin_dir, '..', 'src')
+cmd = "cd {0}; python tests.py".format(functional_spec_dir)
+print cmd
+p = Popen([cmd], shell=True, stdout=PIPE)
+output = p.communicate()[0]
+print output

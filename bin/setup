@@ -5,3 +5,10 @@
 #
 # After this is run, bin/parking_lot
 # should Just Work.
+apt-get update
+apt-get install libreadline-dev -y
+apt-get install libsqlite3-dev -y
+apt-get install libbz2-dev -y
+apt-get install libssl-dev -y
+apt-get install -y python2.7 python-pip
+alias python='/usr/bin/python2'
