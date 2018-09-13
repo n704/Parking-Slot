@@ -7,26 +7,20 @@ from constant import (
     COMMANDS, STATUS_COMMAND, EXIT_COMMAND
 )
 from lib.commands import execute_command
+from utils.command_map import COMMAND_MAP
+from utils.command_generator import CommandGenerator
+
 
 if __name__ == "__main__":
-    is_command_line = False
-    if len(sys.argv) == 2:
-        is_command_line = True
-    if is_command_line:
-        file = open(sys.argv[1], 'r')
-        func_to_execute = file.readline
-    else:
-        def func_to_execute():
-            print "\n"
-            return raw_input()
-    line = func_to_execute()
-    parking_lot = None
-    while line:
-        commands = line.split(' ')
-        if commands[0].strip() in COMMANDS:
-            parking_lot = execute_command(commands, parking_lot)
-        elif commands[0].strip() == EXIT_COMMAND:
+    command_generator = CommandGenerator()
+    commands = command_generator.get_command()
+    for command in commands:
+        command_words = map(lambda x: x.strip(), command.split(' '))
+        if command_words[0] in COMMAND_MAP:
+            concrete_command = COMMAND_MAP[command_words[0]]()
+            concrete_command.execute(command_words)
+        elif command_words[0] == EXIT_COMMAND:
             break
         else:
-            print "Unknown Command"
-        line = func_to_execute()
+            concrete_command = COMMAND_MAP["UNKNOWN"]()
+            concrete_command.execute()

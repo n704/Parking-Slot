@@ -5,6 +5,8 @@ class ParkingLot(object):
     ParkingLot class which gives all the
     """
     def __init__(self, size):
+        super().__init__(name, bases, attrs)
+        self._instance = None
         try:
             size = int(size)
         except ValueError as e:
@@ -13,6 +15,11 @@ class ParkingLot(object):
         self.slots = [None for i in range(size)]
         self.size = size
         print "Created a parking lot with {0} slots".format(size)
+
+    def __call__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__call__(*args, **kwargs)
+        return cls._instance
 
     def _find_free_slot(self):
         for i in range(self.size):
