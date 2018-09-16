@@ -18,7 +18,7 @@ if __name__ == "__main__":
         command_words = map(lambda x: x.strip(), command.split(' '))
         if command_words[0] in COMMAND_MAP:
             concrete_command = COMMAND_MAP[command_words[0]]()
-            concrete_command.execute(command_words)
+            concrete_command.execute(command_words[1:])
         elif command_words[0] == EXIT_COMMAND:
             break
         else:

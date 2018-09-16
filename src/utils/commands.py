@@ -1,5 +1,5 @@
 from .invoker import Command
-from lib.commands import *
+from lib.parking_lot import ParkingLot
 
 class StatusCommand(Command):
     """
@@ -10,7 +10,7 @@ class StatusCommand(Command):
         Execute Command
         """
         parking_lot = ParkingLot()
-        status_parking_lot(command_words, parking_lot)
+        print parking_lot.status_of_parking_lot()
 
 
 class UNKNOWNCommand(Command):
@@ -32,7 +32,8 @@ class CreateParkingCommand(Command):
         """
         Execute Command
         """
-        create_parking_lot(command_words)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(*command_words)
 
 class ParkingCommand(Command):
     """
@@ -44,7 +45,7 @@ class ParkingCommand(Command):
         Execute Command
         """
         parking_lot = ParkingLot()
-        park_a_car(command_words, parking_lot)
+        print parking_lot.park_a_car(*command_words)
 
 
 class LeaveCarCommand(Command):
@@ -57,7 +58,7 @@ class LeaveCarCommand(Command):
         Execute Command
         """
         parking_lot = ParkingLot()
-        leave_parking_lot(command_words, parking_lot)
+        print parking_lot.car_is_leaving(*command_words)
 
 
 class RegCarWithColorCommand(Command):
@@ -70,7 +71,7 @@ class RegCarWithColorCommand(Command):
         Execute Command
         """
         parking_lot = ParkingLot()
-        reg_car_with_color(command_words, parking_lot)
+        print parking_lot.registration_numbers_for_cars_with_colour(*command_words)
 
 
 class SlotNumWithColorCommand(Command):
@@ -83,7 +84,7 @@ class SlotNumWithColorCommand(Command):
         Execute Command
         """
         parking_lot = ParkingLot()
-        slots_with_color(command_words, parking_lot)
+        print parking_lot.slot_numbers_for_cars_with_colour(*command_words)
 
 
 
@@ -97,4 +98,4 @@ class SlotNumWithRegNumCommand(Command):
         Execute Command
         """
         parking_lot = ParkingLot()
-        slots_with_reg_number(command_words, parking_lot)
+        print parking_lot.slot_number_for_registration_number(*command_words)

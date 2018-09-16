@@ -13,6 +13,10 @@ class ParkingLot(object):
     """
     ParkingLot class which gives all the
     """
+    def __init__(self):
+        self.size = 0
+        self.slots = []
+
     def _find_free_slot(self):
         for i in range(self.size):
             if self.slots[i] == None:
@@ -24,7 +28,6 @@ class ParkingLot(object):
             size = int(size)
         except ValueError as e:
             raise Exception("Size need to be Integer: {0}".format(size))
-
         self.slots = [None for i in range(size)]
         self.size = size
         print "Created a parking lot with {0} slots".format(size)
@@ -70,7 +73,7 @@ class ParkingLot(object):
                     self.slots[i].registration_number.strip(),
                     self.slots[i].color.strip()))
         output_string = "\n".join(data)
-        print output_string
+        return output_string
 
     def registration_numbers_for_cars_with_colour(self, color):
         """

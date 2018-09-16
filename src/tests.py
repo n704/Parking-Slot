@@ -141,44 +141,44 @@ class TestingParkingSlot(unittest.TestCase):
         finally:
             sys.stdout = saved_stdout
 
-class TestingEndToEnd(unittest.TestCase):
-    def test_end_to_end(self):
-        import sys
-        from subprocess import call
-        from StringIO import StringIO
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            expected = """Created a parking lot with 6 slots
-Allocated slot number: 1
-Allocated slot number: 2
-Allocated slot number: 3
-Allocated slot number: 4
-Allocated slot number: 5
-Allocated slot number: 6
-Slot number 4 is free
-Slot No.    Registration No    Colour
-1           KA-01-HH-1234      White
-2           KA-01-HH-9999      White
-3           KA-01-BB-0001      Black
-5           KA-01-HH-2701      Blue
-6           KA-01-HH-3141      Black
-Allocated slot number: 4
-Sorry, parking lot is full
-KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333
-1, 2, 4
-6
-Not found
-"""
-            from subprocess import Popen, PIPE
-            p = Popen(["cd .. && ./bin/parking_lot ./functional_spec/fixtures/file_input.txt"], shell=True, stdout=PIPE)
-            output = p.communicate()[0]
-            self.assertEqual(output, expected)
-        finally:
-            sys.stdout = saved_stdout
-
-
+# class TestingEndToEnd(unittest.TestCase):
+#     def test_end_to_end(self):
+#         import sys
+#         from subprocess import call
+#         from StringIO import StringIO
+#         saved_stdout = sys.stdout
+#         try:
+#             out = StringIO()
+#             sys.stdout = out
+#             expected = """Created a parking lot with 6 slots
+# Allocated slot number: 1
+# Allocated slot number: 2
+# Allocated slot number: 3
+# Allocated slot number: 4
+# Allocated slot number: 5
+# Allocated slot number: 6
+# Slot number 4 is free
+# Slot No.    Registration No    Colour
+# 1           KA-01-HH-1234      White
+# 2           KA-01-HH-9999      White
+# 3           KA-01-BB-0001      Black
+# 5           KA-01-HH-2701      Blue
+# 6           KA-01-HH-3141      Black
+# Allocated slot number: 4
+# Sorry, parking lot is full
+# KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333
+# 1, 2, 4
+# 6
+# Not found
+# """
+#             from subprocess import Popen, PIPE
+#             p = Popen(["cd .. && ./bin/parking_lot ./functional_spec/fixtures/file_input.txt"], shell=True, stdout=PIPE)
+#             output = p.communicate()[0]
+#             self.assertEqual(output, expected)
+#         finally:
+#             sys.stdout = saved_stdout
+#
+#
 
 
 
