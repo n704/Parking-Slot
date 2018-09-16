@@ -13,7 +13,8 @@ def create_parking_lot(commands):
     @commands list of command
     """
     if len(commands) == 2:
-        parking_lot = ParkingLot(commands[1])
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(commands[1])
     elif len(commands) == 1:
         raise Exception("Creating ParkingLot need size.\n")
     else:

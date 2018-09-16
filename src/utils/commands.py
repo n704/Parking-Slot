@@ -1,5 +1,5 @@
 from .invoker import Command
-
+from lib.commands import *
 
 class StatusCommand(Command):
     """
@@ -9,7 +9,9 @@ class StatusCommand(Command):
         """
         Execute Command
         """
-        print "Status", command_words
+        parking_lot = ParkingLot()
+        status_parking_lot(command_words, parking_lot)
+
 
 class UNKNOWNCommand(Command):
     """
@@ -30,7 +32,7 @@ class CreateParkingCommand(Command):
         """
         Execute Command
         """
-        print ' '.join(command_words)
+        create_parking_lot(command_words)
 
 class ParkingCommand(Command):
     """
@@ -41,7 +43,8 @@ class ParkingCommand(Command):
         """
         Execute Command
         """
-        print ' '.join(command_words)
+        parking_lot = ParkingLot()
+        park_a_car(command_words, parking_lot)
 
 
 class LeaveCarCommand(Command):
@@ -53,7 +56,8 @@ class LeaveCarCommand(Command):
         """
         Execute Command
         """
-        print ' '.join(command_words)
+        parking_lot = ParkingLot()
+        leave_parking_lot(command_words, parking_lot)
 
 
 class RegCarWithColorCommand(Command):
@@ -65,7 +69,9 @@ class RegCarWithColorCommand(Command):
         """
         Execute Command
         """
-        print ' '.join(command_words)
+        parking_lot = ParkingLot()
+        reg_car_with_color(command_words, parking_lot)
+
 
 class SlotNumWithColorCommand(Command):
     """
@@ -76,7 +82,8 @@ class SlotNumWithColorCommand(Command):
         """
         Execute Command
         """
-        print ' '.join(command_words)
+        parking_lot = ParkingLot()
+        slots_with_color(command_words, parking_lot)
 
 
 
@@ -89,4 +96,5 @@ class SlotNumWithRegNumCommand(Command):
         """
         Execute Command
         """
-        print ' '.join(command_words)
+        parking_lot = ParkingLot()
+        slots_with_reg_number(command_words, parking_lot)

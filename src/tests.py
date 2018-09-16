@@ -12,7 +12,8 @@ class TestingParkingSlot(unittest.TestCase):
         Raise Exception
             * size is not a number.
         """
-        parking_lot = ParkingLot(5)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(5)
         self.assertEqual(parking_lot.size, 5)
         for slot in parking_lot.slots:
             self.assertIsNone(slot)
@@ -25,7 +26,8 @@ class TestingParkingSlot(unittest.TestCase):
         """
         Test parking.
         """
-        parking_lot = ParkingLot(0)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(0)
         try:
             parking_lot.park_a_car("123", "123")
         except Exception as e:
@@ -40,7 +42,8 @@ class TestingParkingSlot(unittest.TestCase):
         """
         Test car leaving.
         """
-        parking_lot = ParkingLot(3)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(3)
         message = parking_lot.car_is_leaving(2)
         self.assertEqual("Slot number 2 is free", message)
         try:
@@ -61,7 +64,8 @@ class TestingParkingSlot(unittest.TestCase):
         """
         Test car with reg number color
         """
-        parking_lot = ParkingLot(5)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(5)
         parking_lot.park_a_car("KA-01-HH-1234", "White")
         parking_lot.park_a_car("KA-01-BB-0001", "Black")
         parking_lot.park_a_car("KA-01-HH-9999", "White")
@@ -76,7 +80,8 @@ class TestingParkingSlot(unittest.TestCase):
         """
         Return slot number of the registerd vehicale
         """
-        parking_lot = ParkingLot(5)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(5)
         parking_lot.park_a_car("KA-01-HH-1234", "White")
         parking_lot.park_a_car("KA-01-BB-0001", "Black")
         parking_lot.park_a_car("KA-01-HH-9999", "White")
@@ -91,7 +96,8 @@ class TestingParkingSlot(unittest.TestCase):
         """
         Test slot_number_for_registration_number.
         """
-        parking_lot = ParkingLot(5)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(5)
         parking_lot.park_a_car("KA-01-HH-1234", "White")
         parking_lot.park_a_car("KA-01-BB-0001", "Black")
         parking_lot.park_a_car("KA-01-HH-9999", "White")
@@ -106,7 +112,8 @@ class TestingParkingSlot(unittest.TestCase):
         """
         Test test_status
         """
-        parking_lot = ParkingLot(6)
+        parking_lot = ParkingLot()
+        parking_lot.create_slot(6)
         parking_lot.park_a_car("KA-01-HH-1234", "White")
         parking_lot.park_a_car("KA-01-HH-9999", "White")
         parking_lot.park_a_car("KA-01-BB-0001", "Black")

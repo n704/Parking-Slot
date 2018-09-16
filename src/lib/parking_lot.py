@@ -1,12 +1,25 @@
+import six
 from car import Car
 
+class Singleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+@six.add_metaclass(Singleton)
 class ParkingLot(object):
     """
     ParkingLot class which gives all the
     """
-    def __init__(self, size):
-        super().__init__(name, bases, attrs)
-        self._instance = None
+    def _find_free_slot(self):
+        for i in range(self.size):
+            if self.slots[i] == None:
+                return i
+        return -1
+
+    def create_slot(self, size):
         try:
             size = int(size)
         except ValueError as e:
@@ -16,16 +29,6 @@ class ParkingLot(object):
         self.size = size
         print "Created a parking lot with {0} slots".format(size)
 
-    def __call__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super().__call__(*args, **kwargs)
-        return cls._instance
-
-    def _find_free_slot(self):
-        for i in range(self.size):
-            if self.slots[i] == None:
-                return i
-        return -1
 
     def park_a_car(self, registration_number, color):
         free_slot = self._find_free_slot()
