@@ -11,7 +11,7 @@ STATUS_COMMAND = "status"
 REG_CAR_WITH_COLOR = "registration_numbers_for_cars_with_colour"
 SLOTS_WITH_COLOR = "slot_numbers_for_cars_with_colour"
 SLOTS_WIH_REG_NUMBER = "slot_number_for_registration_number"
-
+EXIT_COMMAND = "exit"
 
 COMMANDS = [
     CREATE_SLOTS_COMMAND,
